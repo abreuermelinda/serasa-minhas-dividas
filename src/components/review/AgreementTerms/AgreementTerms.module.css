@@ -1,0 +1,78 @@
+.card {
+  padding: 20px;
+  border: 1px solid #dfe3e8;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 6%),
+    0 2px 5px rgb(0 0 0 / 4%);
+}
+
+.card h2 {
+  margin: 0 0 20px;
+  color: #111827;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.termsList {
+  margin: 0;
+  padding-left: 20px;
+  color: #374151;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.termsList li + li {
+  margin-top: 7px;
+}
+
+.termsLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #2563eb;
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.divider {
+  height: 1px;
+  margin: 20px 0;
+  background: #e5e7eb;
+}
+
+.acceptance {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #111827;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.acceptance input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #3b73c5;
+  cursor: pointer;
+}
+
+.termsLink:focus-visible,
+.acceptance input:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  .card {
+    padding: 16px;
+  }
+}

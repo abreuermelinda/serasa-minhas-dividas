@@ -1,0 +1,127 @@
+.card {
+  padding: 20px;
+  border: 1px solid #dfe3e8;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 6%),
+    0 2px 5px rgb(0 0 0 / 4%);
+}
+
+.card h2 {
+  margin: 0 0 20px;
+  color: #111827;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.creditorHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.creditorAvatar {
+  display: flex;
+  flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #dfe3e8;
+  border-radius: 50%;
+  color: #111827;
+  font-size: 0.75rem;
+}
+
+.creditorInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.creditorInfo strong {
+  color: #111827;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.creditorInfo span {
+  color: #6b7280;
+  font-size: 0.75rem;
+}
+
+.summaryList {
+  margin: 0;
+}
+
+.summaryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 44px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.summaryRow dt {
+  color: #6b7280;
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+.summaryRow dd {
+  margin: 0;
+  color: #111827;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.summaryRow .originalAmount {
+  color: #6b7280;
+  font-weight: 400;
+  text-decoration: line-through;
+}
+
+.summaryRow .discountAmount {
+  color: #047857;
+}
+
+.negotiatedRow {
+  padding-top: 14px;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.negotiatedRow dt {
+  color: #111827;
+  font-weight: 700;
+}
+
+.negotiatedRow dd {
+  font-size: 1.125rem;
+}
+
+@media (max-width: 767px) {
+  .card {
+    padding: 16px;
+  }
+
+  .summaryRow {
+    min-height: 40px;
+    gap: 16px;
+  }
+
+  .summaryRow dt,
+  .summaryRow dd {
+    font-size: 0.75rem;
+  }
+
+  .negotiatedRow dd {
+    font-size: 1.125rem;
+  }
+}
