@@ -98,7 +98,7 @@ export default function ReviewPage() {
 
   return (
     <>
-      <AppHeader />
+      <AppHeader onBack={handleBack} />
       <main className={styles.page}>
         <div className={styles.pageContent}>
           <ProgressSteps currentStep="review" />

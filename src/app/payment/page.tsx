@@ -79,7 +79,7 @@ export default function PaymentPage() {
 
   return (
     <>
-      <AppHeader />
+      <AppHeader onBack={handleBack} />
       <main className={styles.container}>
         <div className={styles.progressContainer}>
           <ProgressSteps currentStep="payment" />

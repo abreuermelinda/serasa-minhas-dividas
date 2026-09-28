@@ -2,24 +2,35 @@ import styles from "./AppHeader.module.css";
 
 type AppHeaderProps = {
   userName?: string;
+  onBack?: () => void;
 };
 
 export function AppHeader({
-  userName = "Maria",
+  userName = "Maria Silva",
+  onBack,
 }: AppHeaderProps) {
-  const initials = userName
-    .split(" ")
-    .map((name) => name[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
+  const names = userName.trim().split(/\s+/);
+
+  const firstName = names[0];
+
+  const initials =
+    names.length > 1
+      ? `${names[0][0]}${names[names.length - 1][0]}`.toUpperCase()
+      : names[0][0].toUpperCase();
 
   return (
     <header className={styles.header}>
       <div className={styles.content}>
-        <span className={styles.mobileBack} aria-hidden="true">
-          ‹
-        </span>
+        {onBack && (
+          <button
+            type="button"
+            className={styles.mobileBack}
+            onClick={onBack}
+            aria-label="Voltar para a etapa anterior"
+          >
+            <span aria-hidden="true">‹</span>
+          </button>
+        )}
 
         <strong className={styles.title}>
           Minhas Dívidas
@@ -27,7 +38,7 @@ export function AppHeader({
 
         <div className={styles.user}>
           <span className={styles.greeting}>
-            Olá, {userName}
+            Olá, {firstName}
           </span>
 
           <div
