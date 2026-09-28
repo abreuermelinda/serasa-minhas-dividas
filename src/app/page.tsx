@@ -2,7 +2,10 @@
 
 import { useRouter } from "next/navigation";
 
+import { AppHeader } from "@/components/AppHeader/AppHeader";
+import { ProgressSteps } from "@/components/ProgressSteps/ProgressSteps";
 import { OfferCard } from "@/components/OfferCard/OfferCard";
+
 import { useNegotiation } from "@/contexts/NegotiationContext";
 import { useOffers } from "@/hooks/useOffers";
 import type { Offer } from "@/types/offer";
@@ -12,11 +15,7 @@ import styles from "./page.module.css";
 export default function Home() {
   const router = useRouter();
 
-  const {
-    data: offers,
-    isLoading,
-    isError,
-  } = useOffers();
+  const { data: offers, isLoading, isError } = useOffers();
 
   const { selectOffer } = useNegotiation();
 
@@ -42,26 +41,29 @@ export default function Home() {
   }
 
   return (
-    <main className={styles.container}>
-      <header className={styles.header}>
-        <h1>Escolha como quitar sua dívida</h1>
-        <p>
-          Ofertas para limpar seu nome. Os valores já incluem os descontos.
-        </p>
-      </header>
+    <>
+      <AppHeader />
+      <main className={styles.container}>
+        <div className={styles.progressContainer}>
+          <ProgressSteps currentStep="offers" />
+        </div>
+        <header className={styles.header}>
+          <h1>Escolha como quitar sua dívida</h1>
+          <p>
+            Ofertas para limpar seu nome. Os valores já incluem os descontos.
+          </p>
+        </header>
 
-      <section
-        className={styles.offersGrid}
-        aria-label="Ofertas disponíveis"
-      >
-        {offers?.map((offer) => (
-          <OfferCard
-            key={offer.id}
-            offer={offer}
-            onSelect={handleSelectOffer}
-          />
-        ))}
-      </section>
-    </main>
+        <section className={styles.offersGrid} aria-label="Ofertas disponíveis">
+          {offers?.map((offer) => (
+            <OfferCard
+              key={offer.id}
+              offer={offer}
+              onSelect={handleSelectOffer}
+            />
+          ))}
+        </section>
+      </main>
+    </>
   );
 }

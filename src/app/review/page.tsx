@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { useNegotiation } from "@/contexts/NegotiationContext";
 import { useReview } from "@/hooks/useReview";
 
+import { AppHeader } from "@/components/AppHeader/AppHeader";
+import { ProgressSteps } from "@/components/ProgressSteps/ProgressSteps";
 import { AgreementSummary } from "@/components/review/AgreementSummary/AgreementSummary";
 import { AgreementTerms } from "@/components/review/AgreementTerms/AgreementTerms";
 import { AgreementActions } from "@/components/review/AgreementActions/AgreementActions";
@@ -95,39 +97,43 @@ export default function ReviewPage() {
   }
 
   return (
-    <main className={styles.page}>
-      <div className={styles.pageContent}>
-        <header className={styles.pageHeader}>
-          <h1>Revise seu acordo</h1>
-          <p>Confira os dados antes de confirmar.</p>
-        </header>
+    <>
+      <AppHeader />
+      <main className={styles.page}>
+        <div className={styles.pageContent}>
+          <ProgressSteps currentStep="review" />
+          <header className={styles.pageHeader}>
+            <h1>Revise seu acordo</h1>
+            <p>Confira os dados antes de confirmar.</p>
+          </header>
 
-        <div className={styles.layout}>
-          <div className={styles.leftColumn}>
-            <AgreementSummary
-              offer={selectedOffer}
-              paymentMethod={selectedPaymentMethod}
-            />
+          <div className={styles.layout}>
+            <div className={styles.leftColumn}>
+              <AgreementSummary
+                offer={selectedOffer}
+                paymentMethod={selectedPaymentMethod}
+              />
 
-            <AgreementTerms
-              accepted={acceptedTerms}
-              onAcceptedChange={setAcceptedTerms}
-            />
+              <AgreementTerms
+                accepted={acceptedTerms}
+                onAcceptedChange={setAcceptedTerms}
+              />
+            </div>
+
+            <aside className={styles.actionColumn}>
+              <AgreementActions
+                amount={selectedOffer.negotiatedAmount}
+                paymentMethod={selectedPaymentMethod}
+                canConfirm={acceptedTerms}
+                isPending={reviewMutation.isPending}
+                isError={reviewMutation.isError}
+                onConfirm={handleConfirmAgreement}
+                onBack={handleBack}
+              />
+            </aside>
           </div>
-
-          <aside className={styles.actionColumn}>
-            <AgreementActions
-              amount={selectedOffer.negotiatedAmount}
-              paymentMethod={selectedPaymentMethod}
-              canConfirm={acceptedTerms}
-              isPending={reviewMutation.isPending}
-              isError={reviewMutation.isError}
-              onConfirm={handleConfirmAgreement}
-              onBack={handleBack}
-            />
-          </aside>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
