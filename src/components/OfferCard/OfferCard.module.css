@@ -25,6 +25,25 @@
   font-weight: 700;
 }
 
+.offerInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.creditorInitials {
+  display: flex;
+  flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  color: #111827;
+  font-size: 0.75rem;
+}
+
 .creditorName {
   margin: 0;
   color: #111827;
@@ -57,8 +76,9 @@
 
 .valueGroup {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 4px;
+  width: 100%;
 }
 
 .valueLabel {
@@ -75,7 +95,7 @@
 
 .negotiatedAmount {
   color: #111827;
-  font-size: 1.75rem;
+  font-size: 1.50rem;
   font-weight: 700;
   line-height: 1.2;
 }

@@ -20,13 +20,9 @@ function formatDebtSince(debtSince: string) {
     timeZone: "UTC",
   });
 
-  const date = new Date(
-    Date.UTC(Number(year), Number(month) - 1, 1),
-  );
+  const date = new Date(Date.UTC(Number(year), Number(month) - 1, 1));
 
-  const formattedMonth = monthFormatter
-    .format(date)
-    .replace(".", "");
+  const formattedMonth = monthFormatter.format(date).replace(".", "");
 
   return `${formattedMonth}/${year}`;
 }
@@ -43,34 +39,28 @@ function formatPaymentCondition(condition: PaymentCondition) {
   )}`;
 }
 
-export function OfferCard({
-  offer,
-  onSelect,
-}: OfferCardProps) {
+export function OfferCard({ offer, onSelect }: OfferCardProps) {
+  const creditorInitials = offer.creditorName
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2);
+
   return (
     <article className={styles.card}>
       <div className={styles.header}>
         {offer.isBestOffer && (
-          <span className={styles.bestOffer}>
-            Melhor oferta
-          </span>
+          <span className={styles.bestOffer}>Melhor oferta</span>
         )}
-
-        <h2 className={styles.creditorName}>
-          {offer.creditorName}
-        </h2>
-
+        <div className={styles.offerInfo}>
+          <div className={styles.creditorInitials} aria-hidden="true">
+            {creditorInitials}
+          </div>
+          <h2 className={styles.creditorName}>{offer.creditorName}</h2>
+        </div>
         <p className={styles.debtInfo}>
-          {offer.debtType} · desde{" "}
-          {formatDebtSince(offer.debtSince)}
+          {offer.debtType} · desde {formatDebtSince(offer.debtSince)}
         </p>
-
-        <span
-          className={styles.discount}
-          aria-label={`${offer.discountPercentage}% de desconto`}
-        >
-          {offer.discountPercentage}% off
-        </span>
       </div>
 
       <div className={styles.values}>
@@ -83,11 +73,15 @@ export function OfferCard({
         </div>
 
         <div className={styles.valueGroup}>
-          <span className={styles.valueLabel}>Oferta</span>
-
           <strong className={styles.negotiatedAmount}>
-            {currencyFormatter.format(offer.negotiatedAmount)}
+            Por {currencyFormatter.format(offer.negotiatedAmount)}
           </strong>
+          <span
+            className={styles.discount}
+            aria-label={`${offer.discountPercentage}% de desconto`}
+          >
+            {offer.discountPercentage}% de desconto
+          </span>
         </div>
 
         <p className={styles.paymentCondition}>

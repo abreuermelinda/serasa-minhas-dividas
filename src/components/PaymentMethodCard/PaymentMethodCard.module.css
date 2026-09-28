@@ -1,0 +1,89 @@
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #111827;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover {
+  border-color: #2563eb;
+}
+
+.card:focus-within {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.selected {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+.radio {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin: 3px 0 0;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label {
+  color: #111827;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.fastest {
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: #dcfce7;
+  color: #166534;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.description {
+  margin: 6px 0 0;
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.details {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: #374151;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.details p {
+  margin: 0;
+}
+
+.details p + p {
+  margin-top: 8px;
+}
