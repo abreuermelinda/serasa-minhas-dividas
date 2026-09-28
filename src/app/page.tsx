@@ -1,69 +1,67 @@
-import Image from "next/image";
+"use client";
+
+import { useRouter } from "next/navigation";
+
+import { OfferCard } from "@/components/OfferCard/OfferCard";
+import { useNegotiation } from "@/contexts/NegotiationContext";
+import { useOffers } from "@/hooks/useOffers";
+import type { Offer } from "@/types/offer";
+
 import styles from "./page.module.css";
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+  const router = useRouter();
+
+  const {
+    data: offers,
+    isLoading,
+    isError,
+  } = useOffers();
+
+  const { selectOffer } = useNegotiation();
+
+  function handleSelectOffer(offer: Offer) {
+    selectOffer(offer);
+    router.push("/payment");
+  }
+
+  if (isLoading) {
+    return (
+      <main className={styles.container}>
+        <p>Carregando ofertas...</p>
       </main>
-    </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <main className={styles.container}>
+        <p>Não foi possível carregar as ofertas.</p>
+      </main>
+    );
+  }
+
+  return (
+    <main className={styles.container}>
+      <header className={styles.header}>
+        <h1>Escolha como quitar sua dívida</h1>
+        <p>
+          Ofertas para limpar seu nome. Os valores já incluem os descontos.
+        </p>
+      </header>
+
+      <section
+        className={styles.offersGrid}
+        aria-label="Ofertas disponíveis"
+      >
+        {offers?.map((offer) => (
+          <OfferCard
+            key={offer.id}
+            offer={offer}
+            onSelect={handleSelectOffer}
+          />
+        ))}
+      </section>
+    </main>
   );
 }
